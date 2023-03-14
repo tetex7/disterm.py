@@ -16,6 +16,9 @@ RED = "\033[0;31m"
 NO_COL = "\033[0m"
 YELLOW = "\033[0;33m"
 
+if not os.system("command -v zenity &> /dev/null"):
+    print(f"{RED}CONF ERR:{NO_COL}\n\t{YELLOW}NO ZENITY{NO_COL}")
+
 if ((os.name == "nt") or (sys.platform == "win32")):
     print(f"{RED}CONF ERR:{NO_COL}\n\t{YELLOW}UES WSL{NO_COL}")
     exit(1950)
