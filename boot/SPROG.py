@@ -6,6 +6,7 @@ import os
 SPROG:list[str] = [ "exit", "user_conf" ]
 
 async def conf(ind:disnake.ApplicationCommandInteraction):
+    ind.response.send_message("WIP")
     pass
 
 async def SPP(ind:disnake.ApplicationCommandInteraction, arg:list[str]):
