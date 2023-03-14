@@ -1,0 +1,10 @@
+{
+    "files.associations": {
+        "*.user": "json",
+        "*.user.conf": "json",
+        ".prm": "plaintext",
+        "*.prog": "python",
+        //"*.prog.lib": "python",
+        "*.bot.conf": "json"
+    }
+}

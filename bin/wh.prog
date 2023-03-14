@@ -1,0 +1,11 @@
+#!/usr/bin/env python3
+from lib.libdiscord.TP import DIS_TP
+import sys
+
+def main(FIT:str):
+    t = DIS_TP(FIT)
+    MSG = f"Welcome {t.USER()}"
+    t.ENBED("Welcome", MSG)
+    pass
+
+main(sys.argv[1])

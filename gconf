@@ -1,0 +1,129 @@
+#!/usr/bin/env python3
+import io
+import json
+import sys
+import os
+
+v = False
+
+def vprint(ar:str):
+    if (v == True):
+        print(ar)
+
+DIR = os.path.abspath("jsons/tok.json")
+
+RED = "\033[0;31m"
+NO_COL = "\033[0m"
+YELLOW = "\033[0;33m"
+
+if ((os.name == "nt") or (sys.platform == "win32")):
+    print(f"{RED}CONF ERR:{NO_COL}\n\t{YELLOW}UES WSL{NO_COL}")
+    exit(1950)
+
+Ttok = os.path.abspath("jsons")
+
+
+def gid_clean():
+    with open(DIR) as buff:
+        tT = json.load(buff)
+        tT["GID"] = 0
+    with open(f"{Ttok}/tok.json", "w") as buff:
+        vprint(f"cleaning gid")
+        json.dump(tT, buff, indent=4)
+
+def tok_clean():
+    with open(DIR) as buff:
+        tT = json.load(buff)
+        tT["ton"] = ""
+    with open(DIR) as buff:
+        vprint(f"cleaning ton")
+        json.dump(tT, buff, indent=4)
+
+
+
+def token() -> int:
+    tok:str
+    tT:None
+    os.system("zenity --title token --text token --entry --hide-text > tok")
+    vprint("zenity --title token --text token --entry --hide-text > tok")
+    with open("tok", "r") as buff:
+        tok = buff.read().replace('\n', '')
+        if (tok == ""):
+            return 88
+            
+    with open(DIR) as buff:
+        tT = json.load(buff)
+        tT["ton"] = tok
+    with open(DIR) as buff:
+        json.dump(tT, buff, indent=4)
+    os.system("rm ./tok")
+    return 44
+
+def fGID() -> int:
+    gid:str
+    tT:None
+    os.system("zenity --title gid --text gid --entry --hide-text > gid")
+    with open("gid", "r") as buff:
+            gid = buff.read().replace('\n', '')
+            if (gid == ""):
+                return 188
+    with open(DIR) as buff:
+        tT = json.load(buff)
+        tT["GID"] = int(gid)
+    with open(DIR, "w") as buff:
+        json.dump(tT, buff, indent=4)
+    os.system("rm ./gid")
+    return 44
+
+
+
+def main(arg:str):
+    if (arg == "NULL"):
+        if (token() == 88):
+            print(f"{RED}CONF ERR:{NO_COL}\n\t{YELLOW}BAD TOKEN{NO_COL}")
+            os.system("rm ./tok")
+        if (fGID() == 188):
+            print(f"{RED}CONF ERR:{NO_COL}\n\t{YELLOW}BAD GID{NO_COL}")
+            os.system("rm ./gid")
+    elif (arg == "-c"):
+        print("NUKNING ./jsons/tok.json")
+        os.system("rm ./*.backup.json")
+        tok_clean()
+        gid_clean()
+
+
+def arg() -> int:
+    try:
+        if (sys.argv[1] == "--help"):
+            print("-c : TO RESET VALS")
+            print("-b : BACKUP VALS")
+            return 99
+        elif (sys.argv[1] == "-c"):
+            #print("GOOD ARG")
+            return 0
+        elif (sys.argv[1] == "-b"):
+            #print("GOOD ARG")
+            return 488
+    except:
+        return 288
+
+
+if (os.path.exists(os.path.abspath(DIR)) == False):
+    
+    os.system(f"echo \"\" > {DIR}")
+    TOK = {
+        "ton": "",
+        "GID": 0
+    }
+    with open(DIR, "w") as buff:
+        json.dump(TOK, buff, indent=4)
+
+if (arg() == 99):
+    exit(55)
+elif (arg() == 288):
+    main("NULL")
+elif (arg() == 0):
+    main(sys.argv[1])
+elif (arg() == 488):
+    os.system(f"cp {DIR}/tok.json ./tok.backp.json")
+

@@ -1,0 +1,13 @@
+#!/usr/bin/env python3
+import lib.libdiscord.TP
+#for lib.libdiscord
+import sys
+
+def main(FIT:str, SR:str):
+    
+    t = lib.libdiscord.TP.DIS_TP(FIT)
+    t.TEXT(SR)
+    #print(t.UID())
+
+
+main(sys.argv[1], sys.argv[2])

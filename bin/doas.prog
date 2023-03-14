@@ -1,0 +1,10 @@
+#!/usr/bin/env python3
+from lib.libdiscord.TP import DIS_TP
+import sys
+
+def main(FIT:str, SR:str):
+    print(SR)
+
+
+
+main(sys.argv[1], sys.argv[2])
