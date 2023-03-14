@@ -23,7 +23,7 @@
 # **DISterm** 
 The **Discord Terminal**, <a href="./docs/implement.md"><b>read the docs on how to implement this on your own server</b></a>
 
-<img src="./x46FWlogo.png?raw=true" alt="x46FW logo" align="right" height="250px">
+<!--<img src="./x46FWlogo.png?raw=true" alt="x46FW logo" align="right" height="250px">-->
 
 <!--
      ###
