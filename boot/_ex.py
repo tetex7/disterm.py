@@ -41,10 +41,13 @@ async def intrp(tr:str, inn:disnake.ApplicationCommandInteraction) -> int:
     sd:None
     with open(f"{tr}") as buff:
         sd = json.load(buff)
-    
+    print(sd["DATA"])
+    s:list[str] = list()
+    e:list[disnake.embeds.Embed] = list()
     for i in sd["DATA"]:
         try:
-            await inn.response.send_message(i["RAW_TEXT"])
+            s.append(i["RAW_TEXT"])
+            #await inn.response.send_message(i["RAW_TEXT"])
         except KeyError:
             pass
         try:
@@ -53,9 +56,14 @@ async def intrp(tr:str, inn:disnake.ApplicationCommandInteraction) -> int:
             ft:str = i["EMBED"][2]["FOOER"]
             cL:int = i["EMBED"][3]["CL"]
             d = disnake.embeds.Embed(title=t, description=tc, color=cL)
-            await inn.response.send_message(embed=d)
+            #await inn.response.send_message(embed=d)
+            e.append(d)
         except KeyError:
             pass
+    ss:str = str()
+    for v in s:
+        ss = ss + v
+    await inn.response.send_message(embeds=e,content=ss)
     return 0
 
 
