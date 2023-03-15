@@ -1,4 +1,4 @@
-from io import TextIOWrapper
+#from io import TextIOWrapper
 import json
 
 
@@ -17,6 +17,14 @@ class DIS_TP:
             day = json.load(buff)
             d:list = day["DATA"]
             return d[0]["UID"]
+    
+
+    def USER_MENTI(self) -> str:
+        with open(self.FIR, "r") as buff:
+            day = json.load(buff)
+            d:list = day["DATA"]
+            return d[4]["USER_MENTI"]
+    
 
     def USER(self) -> str:
         with open(self.FIR, "r") as buff:
@@ -29,6 +37,12 @@ class DIS_TP:
             day = json.load(buff)
             d:list = day["DATA"]
             return d[2]["NK_NAME"]
+
+    def GNAME(self) -> str:
+        with open(self.FIR, "r") as buff:
+            day = json.load(buff)
+            d:list = day["DATA"]
+            return d[3]["GNAME"]
 
 
     def ENBED(self, TITLE:str, TEXT:str, CL:int = 0xFF0000, FOOTER:str = "DISTREM v1"):

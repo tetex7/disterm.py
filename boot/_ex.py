@@ -1,6 +1,7 @@
 import disnake
 import json
 from disnake.ext import commands
+import disnake.types.embed
 import os
 import SPROG
 
@@ -42,6 +43,7 @@ async def intrp(tr:str, inn:disnake.ApplicationCommandInteraction) -> int:
     with open(f"{tr}") as buff:
         sd = json.load(buff)
     print(sd["DATA"])
+    print(type(sd))
     s:list[str] = list()
     e:list[disnake.embeds.Embed] = list()
     for i in sd["DATA"]:
@@ -56,6 +58,7 @@ async def intrp(tr:str, inn:disnake.ApplicationCommandInteraction) -> int:
             ft:str = i["EMBED"][2]["FOOER"]
             cL:int = i["EMBED"][3]["CL"]
             d = disnake.embeds.Embed(title=t, description=tc, color=cL)
+            d.set_footer(text=ft)
             #await inn.response.send_message(embed=d)
             e.append(d)
         except KeyError:
@@ -74,6 +77,8 @@ def PRJ(JJ:str, inr:disnake.ApplicationCommandInteraction):
     r["DATA"][0]["UID"] = inr.user.id
     r["DATA"][1]["USER"] = inr.user.name
     r["DATA"][2]["NK_NAME"] = inr.user.nick
+    r["DATA"][3]["GNAME"] = inr.guild.name
+    r["DATA"][4]["USER_MENTI"] = inr.user.mention # str = <@inr.user.id>
     with open(JJ, "w") as buff:
             json.dump(r, buff)
 

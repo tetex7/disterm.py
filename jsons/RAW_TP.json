@@ -2,6 +2,8 @@
     "DATA": [
         {"UID": 0}, 
         {"USER": ""},
-        {"NK_NAME": ""}
+        {"NK_NAME": ""},
+        {"GNAME": "N<A"},
+        {"USER_MENTI": "<@NaN>"}
     ] 
 }

@@ -2,10 +2,10 @@
 from lib.libdiscord.TP import DIS_TP
 import sys
 
-def main(FIT:str):
-    t = DIS_TP(FIT)
-    MSG = f"Welcome {t.USER()}"
-    t.ENBED("Welcome", MSG)
-    pass
+def main(FIT:str) -> int:
+    t = DIS_TP(FIT) 
+    MSG = f"Hay {t.USER_MENTI()}"
+    t.ENBED(f"Welcome {t.USER()} to {t.GNAME()}", MSG, FOOTER=f"Hi {t.USER()}", CL=0x4FF9EA)
+    return 0
 
-main(sys.argv[1])
+sys.exit(main(sys.argv[1]))
