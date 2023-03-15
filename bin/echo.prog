@@ -3,11 +3,12 @@ import lib.libdiscord.TP
 #for lib.libdiscord
 import sys
 
-def main(FIT:str, SR:str):
+def main(FIT:str, SR:str) -> int:
     
     t = lib.libdiscord.TP.DIS_TP(FIT)
     t.TEXT(SR)
     #print(t.UID())
+    return 0
 
 
-main(sys.argv[1], sys.argv[2])
+sys.exit(main(sys.argv[1], sys.argv[2]))

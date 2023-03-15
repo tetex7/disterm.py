@@ -5,6 +5,7 @@ import disnake
 from disnake.ext import commands
 import _ex
 import os
+import sys
 
 RED = "\033[0;31m"
 NO_COL = "\033[0m"
@@ -25,7 +26,7 @@ async def on_ready():
 def BOOT():
     if (os.path.exists(os.path.abspath("jsons/tok.json")) == False):
         print(f"\n{RED}BOT ERR{NO_COL}\n    {YELLOW}NO \"./jsons/tok.json\"\n\t\tUSE \"gconf\" TO MAKE THE JSON{NO_COL}")
-        exit(999)
+        sys.exit(999)
     
     p = os.path.abspath("jsons/tok.json")
     with open(p, "r") as buff:
@@ -35,7 +36,7 @@ def BOOT():
         if (((tTOK == "") or (tTOK == None) or (tTOK == "token")) or (fGID == 0)):
             #cf = os.path.abspath("gconf")
             #os.system(cf)
-            exit(88)
+            sys.exit(88)
         dbot.run(tTOK)
 
 @dbot.slash_command()
