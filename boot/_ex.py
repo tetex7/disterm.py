@@ -66,6 +66,10 @@ async def intrp(tr:str, inn:disnake.ApplicationCommandInteraction) -> int:
     ss:str = str()
     for v in s:
         ss = ss + v
+    if ss is None:
+        await inn.response.send_message(":->")
+    if e is None:
+        await inn.response.send_message(":->")
     await inn.response.send_message(embeds=e,content=ss)
     return 0
 
