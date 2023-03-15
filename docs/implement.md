@@ -8,7 +8,7 @@ the bot does not have a version that runs constantly on some server somewhere yo
 
 because of its storage requirements and the way everything is implemented.
 
-so why do you implement this preferably you going to run it on a Linux machine
+so how do you implement this preferably you going to run it on a Linux machine
 
 just plop it into the home directory and run the boot.sh script
 
