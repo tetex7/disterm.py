@@ -23,6 +23,8 @@
 # **DISterm** 
 The **Discord Terminal**, <a href="./docs/implement.md"><b>read the docs on how to implement this on your own server</b></a>
 
+a Libre alternative to MEE6 or any other modular bot but like I said in the the implementation documents not for your average squeaker's Discord server
+
 <!--<img src="./x46FWlogo.png?raw=true" alt="x46FW logo" align="right" height="250px">-->
 
 <!--
