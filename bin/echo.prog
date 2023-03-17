@@ -6,6 +6,8 @@ import sys
 def main(FIT:str, SR:str) -> int:
     
     t = lib.libdiscord.TP.DIS_TP(FIT)
+    if ((SR == "") or (SR == None)):
+        t.TEXT("NO TEXT ARG")
     t.TEXT(SR)
     #print(t.UID())
     return 0

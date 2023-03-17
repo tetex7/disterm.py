@@ -8,9 +8,11 @@ DIR = os.path.abspath(".")
 def main(FIT:str, CMD:str) -> int:
     t = DIS_TP(FIT)
     sep = CMD.split(' ')
+    t.TEXT(f"{sep}\n{CMD}\n\n")
     if (os.path.exists(f"{DIR}/bin/{sep[0]}.prog") == False):
-        t.ENBED(TITLE=":-(", TEXT=f"{sep[0]}.prog dou's not exists")
+        t.ENBED(TITLE=":-(", TEXT=f"{sep[0]}.prog dos not exists")
         return 55
+    t.TEXT(sep)
 
 
 

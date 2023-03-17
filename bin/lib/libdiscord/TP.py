@@ -1,9 +1,9 @@
 #from io import TextIOWrapper
 import json
-
+from typing import Final
 
 class DIS_TP:
-    FIR:str
+    FIR:Final[str]
     def __UPDAT(self, DAT):
         with open(self.FIR, "w") as buff:
             json.dump(DAT, buff)
@@ -45,7 +45,7 @@ class DIS_TP:
             return d[3]["GNAME"]
 
 
-    def ENBED(self, TITLE:str, TEXT:str, CL:int = 0xFF0000, FOOTER:str = "DISTREM v1"):
+    def ENBED(self, TITLE:str, TEXT:str, CL:int = 0xFF0000, FOOTER:str = "DIStrem"):
         with open(self.FIR) as buff:
             day = json.load(buff)
             lL = day["DATA"]
@@ -60,4 +60,10 @@ class DIS_TP:
             dat = {"RAW_TEXT": f"{TEXT}"}
             lL.append(dat)
             self.__UPDAT(day)
+
+    def __str__(self) -> str:
+        return self.USER()
+
+    def __int__(self) -> int:
+        return self.UID()
 

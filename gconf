@@ -80,7 +80,7 @@ def fGID() -> int:
 
 
 
-def main(arg:str):
+def main(arg:str) -> int:
     if (arg == "NULL"):
         if (token() == 88):
             print(f"{RED}CONF ERR:{NO_COL}\n\t{YELLOW}BAD TOKEN{NO_COL}")
@@ -122,11 +122,11 @@ if (os.path.exists(os.path.abspath(DIR)) == False):
         json.dump(TOK, buff, indent=4)
 
 if (arg() == 99):
-    exit(55)
+    sys.exit(55)
 elif (arg() == 288):
-    main("NULL")
+    sys.exit(main("NULL"))
 elif (arg() == 0):
-    main(sys.argv[1])
+    sys.exit(main(sys.argv[1]))
 elif (arg() == 488):
     os.system(f"cp {DIR}/tok.json ./tok.backp.json")
 

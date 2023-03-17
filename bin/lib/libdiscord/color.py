@@ -1,25 +1,15 @@
-class hex_color:
-    R:int
-    G:int
-    B:int
-    FULL:int
-    def __init__(self, R:int, G:int, B:int):
-        if ((R + G + B) > 0xFFFFFF):
-            self.R = 0xFF
-            self.G = 0xFF
-            self.B = 0xFF
-            self.FULL = 0xFFFFFF
-        else:
-            self.FULL = R + G + B
-            self.R = R
-            self.G = G
-            self.B = B
+from typing import Union, Final
 
+class hex_color:
+    FULL:bytearray
+    def __init__(self, R:bytes, G:bytes, B:bytes):
+            self.FULL = bytearray([R, G, B])
+            
     def __str__(self) -> str:
         return str(self.FULL)
 
     def __int__(self) -> int:
-        return self.FULL
+        return int(self.FULL.hex(), base=16)
 
 
 

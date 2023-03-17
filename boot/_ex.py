@@ -38,6 +38,21 @@ def arg_sep(s:str) -> list[str]:
         temp = ""
     return out
 
+def arr(s:str) -> list[str]:
+    out:list[str] = list()
+    ff = str()
+    for v in s:
+        if (v == " "):
+            out.append(ff)
+            ff = str()
+        if not (v == " "):
+            ff = ff + v
+            
+        if (v == s[s.__len__() - 1]):
+            break
+    return out
+
+
 async def intrp(tr:str, inn:disnake.ApplicationCommandInteraction) -> int:
     sd:None
     with open(f"{tr}") as buff:
@@ -66,10 +81,6 @@ async def intrp(tr:str, inn:disnake.ApplicationCommandInteraction) -> int:
     ss:str = str()
     for v in s:
         ss = ss + v
-    if ss is None:
-        await inn.response.send_message(":->")
-    if e is None:
-        await inn.response.send_message(":->")
     await inn.response.send_message(embeds=e,content=ss)
     return 0
 
@@ -94,10 +105,13 @@ async def EX(inr:disnake.ApplicationCommandInteraction, ex: str) -> int:
     if ((ex == None) or (ex == "")):
          o = 88
     print(ex)
-    sep = ex.split(' ') #arg_sep(ex)
+    er = ex + '\\'
+    sep = ex.replace(" ", ", ").split(",")
 
     if (os.path.exists(f"{DIR}/bin/{sep[0]}.prog") == False):
-        await SPROG.SPP(inr,sep)
+        v = await SPROG.SPP(inr,sep)
+        if (v == 0):
+            await inr.response.send_message(f"NO PROG {sep[0]}.prog")
         o = 78
     
     ss = ""
@@ -105,6 +119,8 @@ async def EX(inr:disnake.ApplicationCommandInteraction, ex: str) -> int:
     PRJ(f"{DIR}/var/temp/{sep[0]}.json", inr)
     for i in range(1, len(sep)):
         ss = ss + sep[i]
+
+    print(ss)
     oi:int = os.system(f"python3 {DIR}/bin/{sep[0]}.prog {DIR}/var/temp/{sep[0]}.json {ss}")
         
     if (not (oi == 0)):
@@ -112,6 +128,7 @@ async def EX(inr:disnake.ApplicationCommandInteraction, ex: str) -> int:
     await intrp(f"{DIR}/var/temp/{sep[0]}.json", inr)
     os.system(f"rm {DIR}/var/temp/{sep[0]}.json")
     if (not o == 0):
-        await inr.response.send_message(f"EX ERR \'{o}\'")
+        #await inr.response.send_message(f"EX ERR \'{o}\'")
+        pass
 
     
