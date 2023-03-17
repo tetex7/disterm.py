@@ -1,10 +1,19 @@
 #!/usr/bin/env python3
 from lib.libdiscord.TP import DIS_TP
 import sys
+import os
 
-def main(FIT:str, SR:str):
-    print(SR)
+DIR = os.path.abspath(".")
+
+def main(FIT:str, CMD:str) -> int:
+    t = DIS_TP(FIT)
+    sep = CMD.split(' ')
+    if (os.path.exists(f"{DIR}/bin/{sep[0]}.prog") == False):
+        t.ENBED(TITLE=":-(", TEXT=f"{sep[0]}.prog dou's not exists")
+        return 55
 
 
 
-main(sys.argv[1], sys.argv[2])
+
+
+sys.exit(main(sys.argv[1], sys.argv[2]))
