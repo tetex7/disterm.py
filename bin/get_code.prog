@@ -11,10 +11,12 @@ def help(FIT:str):
     t = DIS_TP(FIT)
     STR = "get_code [flie]\nfile: path to file"
     t.ENBED("help for get_code", STR)
+    return 0
 
 
 if (sys.argv[2] == "--help"):
     help(sys.argv[1])
+    sys.exit(0)
 
 CODE:str
 DIR = os.path.abspath(".")
