@@ -1,5 +1,6 @@
 import disnake
 import json
+import random
 from disnake.ext import commands
 import disnake.types.embed
 import os
@@ -113,20 +114,21 @@ async def EX(inr:disnake.ApplicationCommandInteraction, ex: str) -> int:
         if (v == 0):
             await inr.response.send_message(f"NO PROG {sep[0]}.prog")
         o = 78
-    
+    js = f"{DIR}/var/temp/{sep[0]}{random.randint(15, 999999)}.json"
+    print(js)
     ss = ""
-    os.system(f"cp {DIR}/jsons/RAW_TP.json {DIR}/var/temp/{sep[0]}.json")
-    PRJ(f"{DIR}/var/temp/{sep[0]}.json", inr)
+    os.system(f"cp {DIR}/jsons/RAW_TP.json {js}")
+    PRJ(js, inr)
     for i in range(1, len(sep)):
         ss = ss + sep[i]
 
     print(ss)
-    oi:int = os.system(f"python3 {DIR}/bin/{sep[0]}.prog {DIR}/var/temp/{sep[0]}.json {ss}")
+    oi:int = os.system(f"python3 {DIR}/bin/{sep[0]}.prog {js} {ss}")
         
     if (not (oi == 0)):
         o = oi
-    await intrp(f"{DIR}/var/temp/{sep[0]}.json", inr)
-    os.system(f"rm {DIR}/var/temp/{sep[0]}.json")
+    await intrp(js, inr)
+    os.system(f"rm {js}")
     if (not o == 0):
         #await inr.response.send_message(f"EX ERR \'{o}\'")
         pass
