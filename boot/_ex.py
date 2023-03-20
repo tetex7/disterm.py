@@ -82,7 +82,10 @@ async def intrp(tr:str, inn:disnake.ApplicationCommandInteraction) -> int:
     ss:str = str()
     for v in s:
         ss = ss + v
-    await inn.response.send_message(embeds=e,content=ss)
+    try:
+        await inn.response.send_message(embeds=e,content=ss)
+    except:
+        return 0
     return 0
 
 
@@ -113,8 +116,10 @@ async def EX(inr:disnake.ApplicationCommandInteraction, ex: str) -> int:
         v = await SPROG.SPP(inr,sep)
         if (v == 0):
             await inr.response.send_message(f"NO PROG {sep[0]}.prog")
+            return 0
         o = 78
-    js = f"{DIR}/var/temp/{sep[0]}{random.randint(15, 999999)}.json"
+    rng = random.randint(15, 999)
+    js = f"{DIR}/var/temp/{sep[0]}{rng}.json"
     print(js)
     ss = ""
     os.system(f"cp {DIR}/jsons/RAW_TP.json {js}")
@@ -124,10 +129,11 @@ async def EX(inr:disnake.ApplicationCommandInteraction, ex: str) -> int:
 
     print(ss)
     oi:int = os.system(f"python3 {DIR}/bin/{sep[0]}.prog {js} {ss}")
-        
+
     if (not (oi == 0)):
         o = oi
     await intrp(js, inr)
+    print(js)
     os.system(f"rm {js}")
     if (not o == 0):
         #await inr.response.send_message(f"EX ERR \'{o}\'")
