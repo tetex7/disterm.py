@@ -1,10 +1,9 @@
 {
     "name": "test",
     "nk_name": "test",
-    "SUDO": false,
     "id": 0,
     "PWD": "/",
     "groups": [
-        "test"
+        "CPWD"
     ]
 }

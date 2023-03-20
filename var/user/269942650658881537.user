@@ -1,11 +1,10 @@
 {
     "name": "Tetex7",
     "nk_name": "A:\\",
-    "SUDO": false,
     "id": "269942650658881537",
     "PWD": "/",
     "groups": [
-        "NONE"
+        "CPWD"
     ],
     "OP": true
 }
