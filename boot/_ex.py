@@ -3,6 +3,7 @@ import json
 import random
 from disnake.ext import commands
 import disnake.types.embed
+from bot import dbot
 import os
 import SPROG
 
@@ -106,6 +107,11 @@ def PRJ(JJ:str, inr:disnake.ApplicationCommandInteraction):
 
 async def EX(inr:disnake.ApplicationCommandInteraction, ex: str) -> int:
     o:int = 0
+    with open(f"{DIR}/jsons/bots_ban.json") as buff:
+        bb = json.load(buff)
+        for v in bb["IDS"]:
+            if (inr.user.id == v):
+                await inr.response.send_message(f"NO {dbot.get_user(v).name}")
     if ((ex == None) or (ex == "")):
          o = 88
     print(ex)
