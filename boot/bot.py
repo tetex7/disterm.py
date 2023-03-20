@@ -10,4 +10,4 @@ class Bot(commands.InteractionBot):
         self.gUILD = gid
         super().__init__()
     
-    
+dbot:Bot
