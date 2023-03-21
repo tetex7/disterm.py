@@ -114,46 +114,54 @@ def PRJ(JJ:str, inr:disnake.ApplicationCommandInteraction):
 
 
 async def EX(inr:disnake.ApplicationCommandInteraction, ex: str) -> int:
-    o:int = 0
-    with open(f"{DIR}/jsons/ban.json") as buff:
-        bb:dict = json.load(buff)
-        for v in bb["IDS"]:
-            if (inr.user.id == v):
-                await inr.response.send_message(f"NO {bot.dbot.get_user(v).name}", tts=True, ephemeral=1)
-                return 44
-    if ((ex == None) or (ex == "")):
-         o = 88
-    print(ex)
-    er = ex + '\\'
-    sep = ex.replace(" ", ", ").split(",")
-    if (sep[0] == "sudo"):
-        sep[0] = "doas"
+    try:
+        o:int = 0
+        with open(f"{DIR}/jsons/ban.json") as buff:
+            bb:dict = json.load(buff)
+            for v in bb["IDS"]:
+                if (inr.user.id == v):
+                    await inr.response.send_message(f"NO {bot.dbot.get_user(v).name}", tts=True, ephemeral=1)
+                    return 44
+        if ((ex == None) or (ex == "")):
+            o = 88
+        print(ex)
+        er = ex + '\\'
+        sep = ex.replace(" ", ", ").split(",")
+        if (sep[0] == "sudo"):
+            sep[0] = "doas"
 
-    if (os.path.exists(f"{DIR}/bin/{sep[0]}.prog") == False):
-        v = await SPROG.SPP(inr,sep)
-        if (v == 0):
-            await inr.response.send_message(f"NO PROG {sep[0]}.prog")
-            return 0
-        o = 78
-    rng = random.randint(15, 999)
-    js = f"{DIR}/var/temp/{sep[0]}{rng}.json"
-    print(js)
-    ss = ""
-    os.system(f"cp {DIR}/jsons/RAW_TP.json {js}")
-    PRJ(js, inr)
-    for i in range(1, len(sep)):
-        ss = ss + sep[i]
+        if (os.path.exists(f"{DIR}/bin/{sep[0]}.prog") == False):
+            v = await SPROG.SPP(inr,sep)
+            if (v == 0):
+                await inr.response.send_message(f"NO PROG {sep[0]}.prog")
+                return 0
+            o = 78
+        rng = random.randint(15, 999)
+        js = f"{DIR}/var/temp/{sep[0]}{rng}.json"
+        print(js)
+        ss = ""
+        os.system(f"cp {DIR}/jsons/RAW_TP.json {js}")
+        PRJ(js, inr)
+        for i in range(1, len(sep)):
+            ss = ss + sep[i]
 
-    print(ss)
-    oi:int = os.system(f"python3 {DIR}/bin/{sep[0]}.prog {js} {ss}")
+        print(ss)
+        oi:int = os.system(f"python3 {DIR}/bin/{sep[0]}.prog {js} {ss}")
 
-    if (not (oi == 0)):
-        o = oi
-    await intrp(js, inr)
-    print(js)
-    os.system(f"rm {js}")
-    if (not o == 0):
-        #await inr.response.send_message(f"EX ERR \'{o}\'")
-        pass
+        if (not (oi == 0)):
+            o = oi
+        await intrp(js, inr)
+        print(js)
+        os.system(f"rm {js}")
+        if (not o == 0):
+            #await inr.response.send_message(f"EX ERR \'{o}\'")
+            pass
+    except Exception as ex:
+        MSG = f"TRACEBACK:\n{ex}"
+        d = disnake.Embed(title="BOT PANIC:", description=MSG, color=0xFF0000)
+        d.set_footer("PANIC!!")
+        inr.response.send_message(embed=d)
+        return
+        
 
     
