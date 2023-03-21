@@ -24,6 +24,7 @@ class user:
                 self.U = json.load(buff)
             self.UID = UID
             self.PT = f"{DIR}/var/user/ROOT.user"
+            return
 
         if(os.path.exists(f"{DIR}/var/user/{UID}.user") == False):
             raise FileExistsError(f"./var/user/{UID}.user dos NOT Exists")

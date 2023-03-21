@@ -1,19 +1,19 @@
 #from io import TextIOWrapper
 import json
 from typing import Final
-from users import user
+import libdiscord.users as users
 import random
 
 class DIS_TP:
     FIR:Final[str]
-    User:Final[user]
+    User:Final[users.user]
     def __UPDAT(self, DAT):
         with open(self.FIR, "w") as buff:
             json.dump(DAT, buff)
 
     def __init__(self, TF:str):
         self.FIR = TF
-        self.User = user(self.UID())
+        self.User = users.user(self.UID())
 
 
     def UID(self) -> int:

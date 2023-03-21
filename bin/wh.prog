@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
-from lib.libdiscord.TP import DIS_TP
-from lib.libdiscord.color import hex_color
+from libdiscord.TP import DIS_TP
+from libdiscord.color import hex_color
 import sys
 
 def main(FIT:str) -> int:

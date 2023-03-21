@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-from lib.libdiscord.TP import DIS_TP
+from libdiscord.TP import DIS_TP
 #for lib.libdiscord
 import sys
 
