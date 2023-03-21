@@ -3,7 +3,7 @@ import json
 import random
 from disnake.ext import commands
 import disnake.types.embed
-from bot import dbot
+import bot
 import os
 import SPROG
 
@@ -91,7 +91,7 @@ async def intrp(tr:str, inn:disnake.ApplicationCommandInteraction) -> int:
 
 
 def PRJ(JJ:str, inr:disnake.ApplicationCommandInteraction):
-    r:None
+    r:dict
     with open(JJ,"r") as buff:
         r = json.load(buff)
     r["DATA"][0]["UID"] = inr.user.id
@@ -107,11 +107,12 @@ def PRJ(JJ:str, inr:disnake.ApplicationCommandInteraction):
 
 async def EX(inr:disnake.ApplicationCommandInteraction, ex: str) -> int:
     o:int = 0
-    with open(f"{DIR}/jsons/bots_ban.json") as buff:
-        bb = json.load(buff)
+    with open(f"{DIR}/jsons/ban.json") as buff:
+        bb:dict = json.load(buff)
         for v in bb["IDS"]:
             if (inr.user.id == v):
-                await inr.response.send_message(f"NO {dbot.get_user(v).name}")
+                await inr.response.send_message(f"NO {bot.dbot.get_user(v).name}", tts=True, ephemeral=1)
+                return 44
     if ((ex == None) or (ex == "")):
          o = 88
     print(ex)

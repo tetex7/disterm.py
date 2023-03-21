@@ -1,21 +1,44 @@
 #!/usr/bin/env python3
 from lib.libdiscord.TP import DIS_TP
+from lib.libdiscord.users import user
+import json
 import sys
 import os
 
 DIR = os.path.abspath(".")
 
-def main(FIT:str, CMD:str) -> int:
+def ROOT(FIT:str):
+    s:dict
+    with open(FIT, 'r') as buff:
+        s = json.load(buff)
+    s["DATA"][0] = -69
+    s["DATA"][1] = "root"
+    s["DATA"][2] = "GOD"
+    with open(FIT, "w") as buff:
+        json.dump(s, buff)
+
+def main(FIT:str, CMD:str):
     t = DIS_TP(FIT)
-    sep = CMD.split(' ')
-    t.TEXT(f"{sep}\n{CMD}\n\n")
-    if (os.path.exists(f"{DIR}/bin/{sep[0]}.prog") == False):
-        t.ENBED(TITLE=":-(", TEXT=f"{sep[0]}.prog dos not exists")
-        return 55
-    t.TEXT(sep)
+    if (t.User.HAS_GROUP("WHEEL")):
+        ROOT(FIT)
+        sep = CMD.replace(" ", ", ").split(",")
+        #t.TEXT(f"{sep}\n{CMD}\n\n")
+        if (os.path.exists(f"{DIR}/bin/{sep[0]}.prog") == False):
+            t.ENBED(TITLE=":-(", TEXT=f"{sep[0]}.prog dos not exists")
+            return
+        else:
+            for i in range(1, len(sep)):
+                ss = ss + sep[i]
+            os.system(f"python3 {DIR}/bin/{sep[0]}.prog {FIT} {ss}")
+            exit()
+    else:
+        exit(4)
+       
+
+    
 
 
 
 
 
-sys.exit(main(sys.argv[1], sys.argv[2]))
+main(sys.argv[1], sys.argv[2])

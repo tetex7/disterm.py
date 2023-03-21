@@ -6,17 +6,20 @@ import sys
 import os
 import io
 
+print(sys.argv[1])
 
 def help(FIT:str):
     t = DIS_TP(FIT)
+    c = hex_color(0x84, 0xF8, 0xF4)
     STR = "get_code [flie]\nfile: path to file"
+    print(hex(c.__int__()))
     t.ENBED("help for get_code", STR)
     return 0
 
 
 if (sys.argv[2] == "--help"):
     help(sys.argv[1])
-    sys.exit(0)
+    exit(0)
 
 CODE:str
 DIR = os.path.abspath(".")
@@ -29,7 +32,13 @@ def main(FIT:str, FNAME:str, bloc:int) -> int:
     t = DIS_TP(FIT)
     if ((FNAME.endswith("tok.json")) or (FNAME.endswith(".user")) or (FNAME.endswith(".user.conf"))):
         t.TEXT("NO")
-        return 666
+        exit()
+
+
+    if (os.path.exists(f"{DIR}/{FNAME}") == False):
+        t.TEXT("BAD PATH")
+        exit(55)
+
     with open(f"{DIR}/{FNAME}", "r") as buff:
         CODE = buff.read()
 
@@ -60,18 +69,21 @@ def main(FIT:str, FNAME:str, bloc:int) -> int:
 
     
     if (FNAME.endswith(".json") or FNAME.endswith(".conf")):
-        t.ENBED(f"{FNAME}", f"```json\n{CODE}\n```", CL=c.__int__())
-        return 0
+        t.ENBED(f"{FNAME}", f"```json\n{CODE}\n```", FOOTER="json view")
+        exit()
     elif (FNAME.endswith(".py") or FNAME.endswith(".boot") or FNAME.endswith(".prog") or FNAME.endswith("gconf")):
-        t.ENBED(f"{FNAME}", f"```py\n{CODE}\n```", CL=c.__int__())
-        return 0
+        t.ENBED(f"{FNAME}", f"```py\n{CODE}\n```", FOOTER="python view")
+        exit()
     elif (FNAME.endswith(".sh")):
-        t.ENBED(f"{FNAME}", f"```sh\n{CODE}\n```", CL=c.__int__())
-        return 0
+        t.ENBED(f"{FNAME}", f"```sh\n{CODE}\n```",FOOTER="shell view")
+        exit()
+    elif (FNAME.endswith(".md")):
+        t.ENBED(f"{FNAME}", f"```md\n{CODE}\n```", FOOTER="markdown view")
+        exit()
     else:
-        t.ENBED(f"BLOCK: {bloc}", f"```\n{bl}\n```", CL=c.__int__(), FOOTER=f"{FNAME}")
-        return 0
+        t.ENBED(f"{FNAME}", f"```\n{CODE}\n```", FOOTER="plain view")
+        exit()
     return 0
 #print()
 #sys.exit(main(sys.argv[1], sys.argv[2], int(sys.argv[3])))
-sys.exit(main(sys.argv[1], sys.argv[2], -1))
+main(sys.argv[1], sys.argv[2], -1)

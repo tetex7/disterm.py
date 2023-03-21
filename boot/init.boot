@@ -5,6 +5,7 @@ import disnake
 from disnake.ext import commands
 import _ex
 import os
+import bot
 import sys
 
 RED = "\033[0;31m"
@@ -17,16 +18,47 @@ with open(CNF) as buff:
 gid = int(j["GID"])
 
 #bot:discord.client.Client = discord.client.Client(intents=discord.Intents.all())
-dbot:bot.Bot = bot.Bot(gid)
+bot.dbot = bot.Bot(gid) 
 
-@dbot.event
+@bot.dbot.event
 async def on_ready():
-        print(f"{YELLOW}DISTERM IS BOOTED\n\tBOT NAME IS {RED}\"{dbot.user.name}\"{NO_COL}")
+        print(f"{YELLOW}DISTERM IS BOOTED\n\tBOT NAME IS {RED}\"{bot.dbot.user.name}\"{NO_COL}")
+
+async def on_member_join(m:disnake.member.Member):
+    DIR = os.path.abspath(".")
+    US = {
+        "name": m.name,
+        "nk_name": m.nick,
+        "id": m.id,
+        "PWD": "/",
+        "groups": [
+            "CPWD"
+        ],
+        "OP": False
+    }
+    os.system(f"touch {DIR}/var/user/{m.id}.user")
+    with open("{DIR}/var/user/{m.id}.user", "w") as buff:
+        json.dump(US, buff)
+
+async def on_member_remove(m:disnake.member.Member):
+    DIR = os.path.abspath(".")
+    os.remove(f"{DIR}/var/user/{m.id}.user")
+
+async def on_member_update(before:disnake.member.Member, after:disnake.member.Member):
+    DIR = os.path.abspath(".")
+    d:dict
+    with open(f"{DIR}/var/user/{after.id}.user", "r") as buff:
+        d = json.load(buff)
+    d["name"] = after.name
+    d["nk_name"] = after.nick
+    with open(f"{DIR}/var/user/{after.id}.user", "w") as buff:
+        json.dump(d, buff)
+
 
 def BOOT():
     if (os.path.exists(os.path.abspath("jsons/tok.json")) == False):
         print(f"\n{RED}BOT ERR{NO_COL}\n    {YELLOW}NO \"./jsons/tok.json\"\n\t\tUSE \"gconf\" TO MAKE THE JSON{NO_COL}")
-        sys.exit(999)
+        exit(999)
     
     p = os.path.abspath("jsons/tok.json")
     with open(p, "r") as buff:
@@ -36,10 +68,10 @@ def BOOT():
         if (((tTOK == "") or (tTOK == None) or (tTOK == "token")) or (fGID == 0)):
             #cf = os.path.abspath("gconf")
             #os.system(cf)
-            sys.exit(88)
-        dbot.run(tTOK)
+            exit(88)
+        bot.dbot.run(tTOK)
 
-@dbot.slash_command()
+@bot.dbot.slash_command()
 async def cmd(inter:disnake.ApplicationCommandInteraction, ex: str):
    await _ex.EX(inter, ex)
     #if (not i == 0):

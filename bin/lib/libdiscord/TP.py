@@ -1,18 +1,22 @@
 #from io import TextIOWrapper
 import json
 from typing import Final
+from users import user
+import random
 
 class DIS_TP:
     FIR:Final[str]
+    User:Final[user]
     def __UPDAT(self, DAT):
         with open(self.FIR, "w") as buff:
             json.dump(DAT, buff)
 
     def __init__(self, TF:str):
         self.FIR = TF
+        self.User = user(self.UID())
 
 
-    def UID(self) -> str:
+    def UID(self) -> int:
         with open(self.FIR, "r") as buff:
             day = json.load(buff)
             d:list = day["DATA"]
@@ -44,8 +48,17 @@ class DIS_TP:
             d:list = day["DATA"]
             return d[3]["GNAME"]
 
-
-    def ENBED(self, TITLE:str, TEXT:str, CL:int = 0xFF0000, FOOTER:str = "DIStrem"):
+    def GEN_DM(self, id:int) -> None:
+        if (self.User.HAS_GROUP("GODS")):
+            DM = [{"TO": 0}]
+            with open(self.FIR, "r") as buff:
+                day:dict = json.load(buff)
+                l:list = day["DATA"]
+                l.append(DM)
+        else:
+            raise PermissionError("NOT disROOT")
+#0xAF95F4
+    def ENBED(self, TITLE:str, TEXT:str, CL:int = random.randint(0, 0xFFFFFF), FOOTER:str = "DIStrem"):
         with open(self.FIR) as buff:
             day = json.load(buff)
             lL = day["DATA"]
@@ -60,6 +73,17 @@ class DIS_TP:
             dat = {"RAW_TEXT": f"{TEXT}"}
             lL.append(dat)
             self.__UPDAT(day)
+
+    def EXIT(self):
+        KILL:Final[dict] = {"KILL": "HO NO"}
+        if (self.User.HAS_GROUP("GODS")):
+            with open(self.FIR) as buff:
+                day:dict = json.load(buff)
+                lL:list = day["DATA"]
+                lL.append(KILL)
+                self.__UPDAT(day)
+        else:
+            raise PermissionError("NOT disROOT")
 
     def __str__(self) -> str:
         return self.USER()

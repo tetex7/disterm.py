@@ -8,6 +8,6 @@ class Bot(commands.InteractionBot):
 
     def __init__(self, gid):
         self.gUILD = gid
-        super().__init__()
+        super().__init__(intents=disnake.Intents.all())
     
 dbot:Bot

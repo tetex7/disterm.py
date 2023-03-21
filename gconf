@@ -21,7 +21,7 @@ if not os.system("command -v zenity &> /dev/null"):
 
 if ((os.name == "nt") or (sys.platform == "win32")):
     print(f"{RED}CONF ERR:{NO_COL}\n\t{YELLOW}UES WSL{NO_COL}")
-    sys.exit(1950)
+    exit(1950)
 
 Ttok = os.path.abspath("jsons")
 
@@ -122,11 +122,11 @@ if (os.path.exists(os.path.abspath(DIR)) == False):
         json.dump(TOK, buff, indent=4)
 
 if (arg() == 99):
-    sys.exit(55)
+    exit(55)
 elif (arg() == 288):
-    sys.exit(main("NULL"))
+    exit(main("NULL"))
 elif (arg() == 0):
-    sys.exit(main(sys.argv[1]))
+    exit(main(sys.argv[1]))
 elif (arg() == 488):
-    os.system(f"cp {DIR}/tok.json ./tok.backp.json")
+    sys.system(f"cp {DIR}/tok.json ./tok.backp.json")
 
