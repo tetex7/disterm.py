@@ -41,7 +41,7 @@ async def on_ready():
                     "OP": False
                 }
                 os.system(f"touch {DIR}/{v.id}.user")
-                with open(f"{DIR}/{m.id}.user", "w") as buff:
+                with open(f"{DIR}/{v.id}.user", "w") as buff:
                     json.dump(US, buff, indent=4)
 
 
