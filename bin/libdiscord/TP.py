@@ -1,19 +1,25 @@
 #from io import TextIOWrapper
 import json
 from typing import Final
-import libdiscord.users as users
+from libdiscord.users import user
+from libdiscord.intp import intp
 import random
 
 class DIS_TP:
     FIR:Final[str]
-    User:Final[users.user]
+    USER:Final[user]
+    INP:Final[intp]
+
+
     def __UPDAT(self, DAT):
         with open(self.FIR, "w") as buff:
             json.dump(DAT, buff)
 
     def __init__(self, TF:str):
         self.FIR = TF
-        self.User = users.user(self.UID())
+        self.USER = user(self.UID())
+        self.INP = intp(self.FIR)
+        self.INP.START_AT_IND(5)
 
 
     def UID(self) -> int:
@@ -30,7 +36,7 @@ class DIS_TP:
             return d[4]["USER_MENTI"]
     
 
-    def USER(self) -> str:
+    def USER_NAME(self) -> str:
         with open(self.FIR, "r") as buff:
             day = json.load(buff)
             d:list = day["DATA"]

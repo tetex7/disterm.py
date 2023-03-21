@@ -56,24 +56,39 @@ def arr(s:str) -> list[str]:
 
 
 async def intrp(tr:str, inn:disnake.ApplicationCommandInteraction) -> int:
-    sd:None
+    sd:dict
     with open(f"{tr}") as buff:
         sd = json.load(buff)
     print(sd["DATA"])
-    print(type(sd))
+    print(sd["INTP_CALL"])
+    ie:int = len(sd["DATA"])
+    ib:int = 0
+
+    for v in sd["INTP_CALL"]:
+        try:
+            ib = v["START_AT"]
+        except KeyError:
+            pass
+
+        try:
+            ie = v["END_AT"]
+        except KeyError:
+            pass
+
     s:list[str] = list()
     e:list[disnake.embeds.Embed] = list()
-    for i in sd["DATA"]:
+    for i in range(ib, ie):
+        df = sd["DATA"][i]
         try:
-            s.append(i["RAW_TEXT"])
+            s.append(df["RAW_TEXT"])
             #await inn.response.send_message(i["RAW_TEXT"])
         except KeyError:
             pass
         try:
-            t:str = i["EMBED"][0]["TITLE"]
-            tc:str = i["EMBED"][1]["TEXT"]
-            ft:str = i["EMBED"][2]["FOOER"]
-            cL:int = i["EMBED"][3]["CL"]
+            t:str = df["EMBED"][0]["TITLE"]
+            tc:str = df["EMBED"][1]["TEXT"]
+            ft:str = df["EMBED"][2]["FOOER"]
+            cL:int = df["EMBED"][3]["CL"]
             d = disnake.embeds.Embed(title=t, description=tc, color=cL)
             d.set_footer(text=ft)
             #await inn.response.send_message(embed=d)
@@ -82,7 +97,7 @@ async def intrp(tr:str, inn:disnake.ApplicationCommandInteraction) -> int:
             pass
         
         try:
-            if i["EXIT"] == "HO NO":
+            if df["EXIT"] == "HO NO":
                 pass
             exit()
             #await inn.response.send_message(i["RAW_TEXT"])

@@ -6,6 +6,7 @@ from disnake.ext import commands
 import _ex
 import os
 import bot
+from typing import Final
 import sys
 
 RED = "\033[0;31m"
@@ -23,11 +24,32 @@ bot.dbot = bot.Bot(gid)
 @bot.dbot.event
 async def on_ready():
         print(f"{YELLOW}DISTERM IS BOOTED\n\tBOT NAME IS {RED}\"{bot.dbot.user.name}\"{NO_COL}")
+        M:Final[list[disnake.Member]] = bot.dbot.GET_USERS()
+        DIR = os.path.abspath("./var/user")
+        dir = os.listdir(DIR)
+        for v in M:
+            for d in dir:
+                if ((d == f"{v.id}.user") == False):
+                    US:Final[dict] = {
+                    "name": v.name,
+                    "nk_name": v.nick,
+                    "id": v.id,
+                    "PWD": "/",
+                    "groups": [
+                        "CPWD"
+                    ],
+                    "OP": False
+                }
+                os.system(f"touch {DIR}/{v.id}.user")
+                with open(f"{DIR}/{m.id}.user", "w") as buff:
+                    json.dump(US, buff, indent=4)
+
+
 
 @bot.dbot.event
 async def on_member_join(m:disnake.member.Member):
     DIR = os.path.abspath(".")
-    US = {
+    US:Final[dict] = {
         "name": m.name,
         "nk_name": m.nick,
         "id": m.id,
@@ -38,7 +60,7 @@ async def on_member_join(m:disnake.member.Member):
         "OP": False
     }
     os.system(f"touch {DIR}/var/user/{m.id}.user")
-    with open("{DIR}/var/user/{m.id}.user", "w") as buff:
+    with open(f"{DIR}/var/user/{m.id}.user", "w") as buff:
         json.dump(US, buff, indent=4)
 
 @bot.dbot.event
