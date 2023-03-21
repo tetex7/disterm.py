@@ -80,6 +80,14 @@ async def intrp(tr:str, inn:disnake.ApplicationCommandInteraction) -> int:
             e.append(d)
         except KeyError:
             pass
+        
+        try:
+            if i["EXIT"] == "HO NO":
+                pass
+            exit()
+            #await inn.response.send_message(i["RAW_TEXT"])
+        except KeyError:
+            pass
     ss:str = str()
     for v in s:
         ss = ss + v

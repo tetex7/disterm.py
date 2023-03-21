@@ -1,0 +1,14 @@
+#!/usr/bin/env python3
+from libdiscord.TP import DIS_TP
+import sys
+
+def main(FIT:str):
+    t = DIS_TP(FIT)
+    if (t.User.HAS_GROUP("GODS")):
+        t.TEXT("GOOD BYE")
+        t.EXIT()
+    else:
+        t.TEXT("NEED ROOT")
+    return
+
+main(sys.argv[1])
