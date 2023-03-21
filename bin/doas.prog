@@ -38,8 +38,12 @@ def main(FIT:str, CMD:str):
 
     
 
+a:str = str()
 
+for i in range(2, len(sys.argv)):
+    if not i == 2:
+        a = a + " " + sys.argv[i]
+    else:
+        a = a + sys.argv[i]
 
-
-
-main(sys.argv[1], sys.argv[2])
+main(sys.argv[1], a)
