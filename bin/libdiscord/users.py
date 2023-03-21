@@ -62,6 +62,15 @@ class user:
                 return True
         return False
 
+    def IS_TRUE_GROUP(self, g:str) -> bool:
+        GROUP:Final[dict]
+        with open(f"{DIR}/jsons/group.json") as buff:
+            GROUP = json.load(buff)
+        for v in GROUP["GROUPS"]:
+            if (v == g):
+                return True
+        return False
+
     def GET_PWD(self) -> str:
         j:dict
         with open(self.PT) as buff:
