@@ -24,6 +24,7 @@ bot.dbot = bot.Bot(gid)
 async def on_ready():
         print(f"{YELLOW}DISTERM IS BOOTED\n\tBOT NAME IS {RED}\"{bot.dbot.user.name}\"{NO_COL}")
 
+@bot.dbot.event
 async def on_member_join(m:disnake.member.Member):
     DIR = os.path.abspath(".")
     US = {
@@ -38,12 +39,14 @@ async def on_member_join(m:disnake.member.Member):
     }
     os.system(f"touch {DIR}/var/user/{m.id}.user")
     with open("{DIR}/var/user/{m.id}.user", "w") as buff:
-        json.dump(US, buff)
+        json.dump(US, buff, indent=4)
 
+@bot.dbot.event
 async def on_member_remove(m:disnake.member.Member):
     DIR = os.path.abspath(".")
     os.remove(f"{DIR}/var/user/{m.id}.user")
 
+@bot.dbot.event
 async def on_member_update(before:disnake.member.Member, after:disnake.member.Member):
     DIR = os.path.abspath(".")
     d:dict
@@ -52,7 +55,7 @@ async def on_member_update(before:disnake.member.Member, after:disnake.member.Me
     d["name"] = after.name
     d["nk_name"] = after.nick
     with open(f"{DIR}/var/user/{after.id}.user", "w") as buff:
-        json.dump(d, buff)
+        json.dump(d, buff, indent=4)
 
 
 def BOOT():

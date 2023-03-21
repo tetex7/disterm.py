@@ -118,6 +118,8 @@ async def EX(inr:disnake.ApplicationCommandInteraction, ex: str) -> int:
     print(ex)
     er = ex + '\\'
     sep = ex.replace(" ", ", ").split(",")
+    if (sep[0] == "sudo"):
+        sep[0] = "doas"
 
     if (os.path.exists(f"{DIR}/bin/{sep[0]}.prog") == False):
         v = await SPROG.SPP(inr,sep)
