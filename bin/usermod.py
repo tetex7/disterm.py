@@ -12,4 +12,4 @@ def main(FIT:str, SR:str) -> int:
     return
 
 
-exit(main(sys.argv[1], sys.argv[2]))
+main(sys.argv[1], sys.argv[2])
