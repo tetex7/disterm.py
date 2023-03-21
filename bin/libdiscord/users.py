@@ -53,6 +53,17 @@ class user:
             j = json.load(buff)
         return list(j["groups"]).copy()
 
+    def ADD_TO_GROUP(self, s:str):
+        if (self.HAS_GROUP("WHEEL")):
+            if self.IS_TRUE_GROUP(s):
+                j:dict
+                with open(self.PT) as buff:
+                    j = json.load(buff)
+                list(j["groups"]).append(s)
+                self.__UPDAT(j)
+        else:
+            return
+
     def HAS_GROUP(self, s:str) -> bool:
         j:dict
         with open(self.PT) as buff:
@@ -62,7 +73,7 @@ class user:
                 return True
         return False
         
-    def IS_TRUE_GROUP(self, g:str) -> bool:
+    def IS_TRUE_GROUP(g:str) -> bool:
         GROUP:Final[dict]
         with open(f"{DIR}/jsons/group.json") as buff:
             GROUP = json.load(buff)
