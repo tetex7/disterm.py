@@ -77,6 +77,7 @@ async def intrp(tr:str, inn:disnake.ApplicationCommandInteraction) -> int:
 
     s:list[str] = list()
     e:list[disnake.embeds.Embed] = list()
+    evo:bool = False
     for i in range(ib, ie):
         df = sd["DATA"][i]
         try:
@@ -103,11 +104,19 @@ async def intrp(tr:str, inn:disnake.ApplicationCommandInteraction) -> int:
             #await inn.response.send_message(i["RAW_TEXT"])
         except KeyError:
             pass
+
+        try:
+            if df["UOM"] == "HO NO":
+                evo = True
+            
+            #await inn.response.send_message(i["RAW_TEXT"])
+        except KeyError:
+            pass
     ss:str = str()
     for v in s:
         ss = ss + v
     try:
-        await inn.response.send_message(embeds=e,content=ss)
+        await inn.response.send_message(embeds=e,content=ss, ephemeral=evo)
     except:
         return 0
     return 0

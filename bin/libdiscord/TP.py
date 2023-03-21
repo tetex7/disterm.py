@@ -53,6 +53,15 @@ class DIS_TP:
             day = json.load(buff)
             d:list = day["DATA"]
             return d[3]["GNAME"]
+    
+    def UOM(self):
+        with open(self.FIR) as buff:
+            day = json.load(buff)
+            lL = day["DATA"]
+            dat = {"UOM": 0}
+            lL.append(dat)
+            self.__UPDAT(day)
+
 
     def GEN_DM(self, id:int) -> None:
         if (self.User.HAS_GROUP("GODS")):
@@ -77,6 +86,14 @@ class DIS_TP:
             day = json.load(buff)
             lL = day["DATA"]
             dat = {"RAW_TEXT": f"{TEXT}"}
+            lL.append(dat)
+            self.__UPDAT(day)
+
+    def DEF_TEXT(self, TEXT:str):
+        with open(self.FIR) as buff:
+            day = json.load(buff)
+            lL = day["DATA"]
+            dat = {"DEF_TEXT": f"{TEXT}"}
             lL.append(dat)
             self.__UPDAT(day)
 
