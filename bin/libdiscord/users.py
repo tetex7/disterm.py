@@ -61,7 +61,7 @@ class user:
             if (s == v):
                 return True
         return False
-
+        
     def IS_TRUE_GROUP(self, g:str) -> bool:
         GROUP:Final[dict]
         with open(f"{DIR}/jsons/group.json") as buff:
