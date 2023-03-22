@@ -36,11 +36,13 @@ def motd():
     day = datetime.datetime.now().day
     o_day = 0
     while(True):
-        day = datetime.datetime.now().day
         if not (day == o_day):
             o_day = day
             r = random.randint(0, len(mt))
             bot.dbot.change_presence(status=disnake.Status.online,activity=disnake.Activity(name=mt[r]))
+            os.system(f"rm {DIR}/var/temp/*")
+        day = datetime.datetime.now().day
+        
 
 @bot.dbot.event
 async def on_ready():
@@ -48,7 +50,6 @@ async def on_ready():
         print(f"{YELLOW}DISTERM IS BOOTED\n\tBOT NAME IS {RED}\"{bot.dbot.user.name}\"{NO_COL}")
         M:Final[list[disnake.Member]] = bot.dbot.GET_USERS()
         DIR = os.path.abspath("./var/user")
-        d = bot.MOTD[random.randint(0, len(bot.MOTD))]
         dir = os.listdir(DIR)
         for v in M:
             for d in dir:
@@ -60,6 +61,11 @@ async def on_ready():
                     "PWD": "/",
                     "groups": [
                         "CPWD"
+                    ],
+                    "FAM": [
+                        {"sibling": []},
+                        {"spouse": []},
+                        {"child": []},
                     ],
                     "OP": False
                 }
@@ -80,6 +86,11 @@ async def on_member_join(m:disnake.member.Member):
         "PWD": "/",
         "groups": [
             "CPWD"
+        ],
+        "FAM": [
+            {"sibling": []},
+            {"spouse": []},
+            {"child": []},
         ],
         "OP": False
     }

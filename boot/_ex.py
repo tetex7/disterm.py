@@ -16,7 +16,7 @@ def arg_sep(args:str) -> list[str]:
     out:list[str] = list()
     ind = range(0, len(args))
     i = 0
-    while (not i > (len(args) - 1)):
+    while (not i > (len(args) - 1)):  #cursed C like for Loop
 
         if (args[i] == '"'):
             temp = temp + args[i]
