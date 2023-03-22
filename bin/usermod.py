@@ -31,6 +31,6 @@ def main(FIT:str, SR:str) -> int:
 
 
 try:
-    dmain(sys.argv[1], int(sys.argv[2]), sys.argv[3])
+    dmain(sys.argv[1], int(sys.argv[2].replace("<@", "").replace(">", "")), sys.argv[3])
 except:
     main(sys.argv[1], sys.argv[2])

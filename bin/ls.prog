@@ -8,15 +8,28 @@ import io
 
 DIR = os.path.abspath(".")
 
-def main(FIT:str, GN:str) -> int:
+def dmain(FIT:str, GN:str) -> int:
+    t = DIS_TP(FIT)
     c = hex_color(0x84, 0xF8, 0xF4)
-    d = os.listdir(DIR)
+    d = os.listdir(f"{DIR}/{GN}")
     s:str = ""
     for v in d:
         if (not v.startswith('.')):
             s = s + v + '\n'
-    t = DIS_TP(FIT) 
     t.ENBED("ls '/':\n", s, CL=c.__int__())
     return 0
 
-sys.exit(main(sys.argv[1], ""))
+def main(FIT:str, GN:str) -> int:
+    t = DIS_TP(FIT)
+    c = hex_color(0x84, 0xF8, 0xF4)
+    d = os.listdir(f"{DIR}/{t.USER.GET_PWD()}")
+    s:str = ""
+    for v in d:
+        if (not v.startswith('.')):
+            s = s + v + '\n'
+    t.ENBED("ls '/':\n", s, CL=c.__int__())
+    return 0
+try:
+    dmain(sys.argv[1], sys.argv[2])
+except:
+    main(sys.argv[1], "")

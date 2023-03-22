@@ -1,0 +1,17 @@
+#!/usr/bin/env python3
+from libdiscord.TP import DIS_TP
+#for lib.libdiscord
+import sys
+
+def main(FIT:str, SR:str) -> int:
+    
+    t = DIS_TP(FIT)
+    if ((SR == "") or (SR == None)):
+        t.TEXT("path")
+    t.TEXT("?")
+    t.UOM()
+    t.USER.SET_PWD(SR)
+    return 0
+
+
+exit(main(sys.argv[1], sys.argv[2]))
