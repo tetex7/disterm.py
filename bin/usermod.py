@@ -6,7 +6,7 @@ import sys
 if (sys.argv[2] == "--help"):
     t = DIS_TP(sys.argv[1])
     t.ENBED(TITLE="TODO", TEXT="TODO")
-    return
+    exit()
 
 
 def dmain(FIT:str, ID:int, g:str):
