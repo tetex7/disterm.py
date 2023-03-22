@@ -110,7 +110,7 @@ async def intrp(tr:str, inn:disnake.ApplicationCommandInteraction) -> int:
             pass
 
         try:
-            if df["TTS"] == "0":
+            if df["TTS"] == 0:
                 TTS = True
             
             #await inn.response.send_message(i["RAW_TEXT"])
