@@ -6,6 +6,9 @@ from disnake.ext import commands
 import _ex
 import os
 import bot
+import datetime
+import threading
+import random
 from typing import Final
 import sys
 
@@ -18,8 +21,26 @@ with open(CNF) as buff:
     j = json.load(buff)
 gid = int(j["GID"])
 
+TH:threading.Thread
+
 #bot:discord.client.Client = discord.client.Client(intents=discord.Intents.all())
 bot.dbot = bot.Bot(gid) 
+
+def motd():
+    DIR = os.path.abspath(".")
+    mt = bot.MOTD.copy()
+    with open(f"{DIR}/jsons/MOTD.json") as buff:
+        d:dict = json.load(buff)
+        for v in d["MOTD"]:
+            mt.append(v)
+    day = datetime.datetime.now().day
+    o_day = 0
+    while(True):
+        day = datetime.datetime.now().day
+        if not (day == o_day):
+            o_day = day
+            r = random.randint(0, len(mt))
+            bot.dbot.change_presence(status=disnake.Status.online,activity=disnake.Activity(name=mt[r]))
 
 @bot.dbot.event
 async def on_ready():
@@ -50,6 +71,7 @@ async def on_ready():
 
 @bot.dbot.event
 async def on_member_join(m:disnake.member.Member):
+    G = bot.dbot.GET_GUILD()
     DIR = os.path.abspath(".")
     US:Final[dict] = {
         "name": m.name,
@@ -97,6 +119,8 @@ def BOOT():
             #os.system(cf)
             exit(88)
         bot.dbot.run(tTOK)
+        TH = threading.Thread(target=motd)
+        TH.start()
 
 @bot.dbot.slash_command()
 async def cmd(inter:disnake.ApplicationCommandInteraction, ex: str):

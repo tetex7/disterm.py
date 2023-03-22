@@ -16,7 +16,7 @@ class Bot(commands.InteractionBot):
     def GET_USERS(self) -> list[disnake.Member]:
         return self.GET_GUILD().members.copy()
 
-MOTD:Final[str] = [
+MOTD:Final[list[str]] = [
     "⛧ Hail Satan ⛧",
 
 ]
