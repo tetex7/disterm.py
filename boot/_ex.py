@@ -57,6 +57,7 @@ async def intrp(tr:str, inn:disnake.ApplicationCommandInteraction) -> int:
     print(sd["DATA"])
     print(sd["INTP_CALL"])
     ie:int = len(sd["DATA"])
+    TTS = False
     ib:int = 0
 
     for v in sd["INTP_CALL"]:
@@ -101,8 +102,16 @@ async def intrp(tr:str, inn:disnake.ApplicationCommandInteraction) -> int:
             pass
 
         try:
-            if df["UOM"] == "HO NO":
+            if df["UOM"] == 0:
                 evo = True
+            
+            #await inn.response.send_message(i["RAW_TEXT"])
+        except KeyError:
+            pass
+
+        try:
+            if df["TTS"] == "0":
+                TTS = True
             
             #await inn.response.send_message(i["RAW_TEXT"])
         except KeyError:
@@ -111,7 +120,7 @@ async def intrp(tr:str, inn:disnake.ApplicationCommandInteraction) -> int:
     for v in s:
         ss = ss + v
     try:
-        await inn.response.send_message(embeds=e,content=ss, ephemeral=evo)
+        await inn.response.send_message(embeds=e,content=ss, ephemeral=evo, tts=TTS)
     except:
         return 0
     return 0

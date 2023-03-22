@@ -62,6 +62,14 @@ class DIS_TP:
             lL.append(dat)
             self.__UPDAT(day)
 
+    def TTS(self):
+        with open(self.FIR) as buff:
+            day = json.load(buff)
+            lL = day["DATA"]
+            dat = {"TTS": 0}
+            lL.append(dat)
+            self.__UPDAT(day)
+
 
     def GEN_DM(self, id:int) -> None:
         if (self.User.HAS_GROUP("GODS")):
