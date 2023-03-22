@@ -9,6 +9,7 @@ def main(FIT:str, SR:str) -> int:
         t.TEXT("NO TEXT ARG")
         return
     t.USER.ADD_TO_GROUP(SR)
+    t.TEXT("GROUP ADDED")
     return
 
 

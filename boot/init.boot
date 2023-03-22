@@ -23,9 +23,11 @@ bot.dbot = bot.Bot(gid)
 
 @bot.dbot.event
 async def on_ready():
+        import random
         print(f"{YELLOW}DISTERM IS BOOTED\n\tBOT NAME IS {RED}\"{bot.dbot.user.name}\"{NO_COL}")
         M:Final[list[disnake.Member]] = bot.dbot.GET_USERS()
         DIR = os.path.abspath("./var/user")
+        d = bot.MOTD[random.randint(0, len(bot.MOTD))]
         dir = os.listdir(DIR)
         for v in M:
             for d in dir:

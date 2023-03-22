@@ -9,50 +9,45 @@ import SPROG
 
 DIR = os.path.abspath(".")
 
-def arg_sep(s:str) -> list[str]:
-    out:list[str] = list()
-    print(len(s))
-    print(out)
+def arg_sep(args:str) -> list[str]:
     temp:str = str()
-    temp_intn:int = 0
-
-    for i in range(0, len(s)):
-        if (s[i] == ' '):
-            continue
-        elif ((s[i] == '"') or (s[i] == '\'')):
-            temp = temp + s[i]
-            for dd in range(i, len(s)):
-                if ((s[dd] == '"') or (s[dd] == '\'')):
-                    temp = temp + s[dd]
-                    out.append(temp)
-                    break
-        elif (s[i] == '-'):
-            temp = temp + s[i]
-            for yy in range(i, len(s)):
-                temp = temp + s[yy]
-                if (s == ' '):
-                    out.append(temp)
-                    break
-        else:
-            temp = temp + s[i]
-            if (s[i] == s[len(s)]):
-                out.append(temp)
-        temp = ""
-    return out
-
-def arr(s:str) -> list[str]:
+    print(len(args) - 1)
+    #ebn = False
     out:list[str] = list()
-    ff = str()
-    for v in s:
-        if (v == " "):
-            out.append(ff)
-            ff = str()
-        if not (v == " "):
-            ff = ff + v
+    ind = range(0, len(args))
+    i = 0
+    while (not i > (len(args) - 1)):
+
+        if (args[i] == '"'):
+            temp = temp + args[i]
+            for id in range(i+1, len(args)):
+                temp = temp + args[id] 
+                if (args[id] == '"'):
+                    if (args[id] == '"'):
+                        out.append(temp)
+                        temp = str()
+                        i = id 
+                        break
+                    temp = temp + args[id]
+                    out.append(temp)
+                    i = id
+                    temp = str()
+                    break
+                     
+        else:
+            if (args[i].isspace()):
+                if not (temp == ""):
+                    out.append(temp)
+                temp = str()
+                i = i + 1
+                continue
+            else:
+                temp = temp + args[i]
+        i = i + 1
             
-        if (v == s[s.__len__() - 1]):
-            break
-    return out
+    if not (temp == ""):
+        out.append(temp)
+    return out.copy()
 
 
 async def intrp(tr:str, inn:disnake.ApplicationCommandInteraction) -> int:
@@ -150,7 +145,7 @@ async def EX(inr:disnake.ApplicationCommandInteraction, ex: str) -> int:
             o = 88
         print(ex)
         er = ex + '\\'
-        sep = ex.replace(" ", ", ").split(",")
+        sep = arg_sep(ex)
         if (sep[0] == "sudo"):
             sep[0] = "doas"
 
