@@ -4,7 +4,8 @@ import sys
 
 def main(FIT:str):
     t = DIS_TP(FIT)
-    if (t.User.HAS_GROUP("GODS")):
+    if (t.USER.HAS_GROUP("GODS")):
+        t.TTS()
         t.TEXT("GOOD BYE")
         t.EXIT()
     else:

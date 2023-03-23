@@ -7,7 +7,7 @@ def main(FIT:str) -> int:
     c = hex_color(0x4F, 0xF9, 0xEA)
     t = DIS_TP(FIT) 
     MSG = f"Hay {t.USER_MENTI()}"
-    t.ENBED(f"Welcome {t.USER()} to {t.GNAME()}", MSG, FOOTER=f"Hi {t.USER()}", CL=0xAFCFFF)
+    t.ENBED(f"Welcome {t.USER_NAME()} to {t.GNAME()}", MSG, FOOTER=f"Hi {t.USER_NAME}", CL=0xAFCFFF)
     return 0
 
 sys.exit(main(sys.argv[1]))

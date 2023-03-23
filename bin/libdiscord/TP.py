@@ -19,7 +19,7 @@ class DIS_TP:
         self.FIR = TF
         self.USER = user(self.UID())
         self.INP = intp(self.FIR)
-        self.INP.START_AT_IND(5)
+        self.INP.START_AT_IND(4)
 
 
     def UID(self) -> int:
