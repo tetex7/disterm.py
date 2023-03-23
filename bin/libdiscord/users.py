@@ -5,6 +5,9 @@ from typing import Final
 
 DIR:Final[str] = os.path.abspath(".") 
 
+def AT_TO_ID(AT:str) -> int:
+    return int(AT.replace("<@","").replace(">",""))
+
 class user:
     U:dict
     UID:Final[int]
