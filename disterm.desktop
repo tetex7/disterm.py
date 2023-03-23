@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=disterm
+Exec='bash ./boot.sh'
+GenericName=The Discord Terminal
+Icon=yast-bootloader
+Path=~/disterm.py
+Terminal=true
+Type=Application
+Version=1.0
