@@ -58,6 +58,7 @@ async def intrp(tr:str, inn:disnake.ApplicationCommandInteraction) -> int:
     print(sd["INTP_CALL"])
     ie:int = len(sd["DATA"])
     en:bool = 1
+    n:bool = 0
     TTS = False
     ib:int = 0
 
@@ -71,7 +72,11 @@ async def intrp(tr:str, inn:disnake.ApplicationCommandInteraction) -> int:
             ie = v["END_AT"]
         except KeyError:
             pass
-
+        try:
+            ie = v["NUCK"]
+            n = True
+        except KeyError:
+            pass
         try:
             ie = v["NO_EMBED"]
             en = False
@@ -141,6 +146,8 @@ async def intrp(tr:str, inn:disnake.ApplicationCommandInteraction) -> int:
         await inn.response.send_message(embeds=e,content=ss, ephemeral=evo, tts=TTS)
     except:
         return 0
+    if (n == True):
+        await inn.target.delete()
     return 0
 
 
@@ -164,6 +171,7 @@ async def EX(inr:disnake.ApplicationCommandInteraction, ex: str) -> int:
         o:int = 0
         with open(f"{DIR}/jsons/ban.json") as buff:
             bb:dict = json.load(buff)
+            list(bb["IDS"]).append(187385331753025536)
             for v in bb["IDS"]:
                 if (inr.user.id == v):
                     await inr.response.send_message(f"NO {bot.dbot.get_user(v).name}", tts=True, ephemeral=1)
