@@ -32,7 +32,25 @@ class intp:
         self.__UPDAT(df)
 
     def END_AT_IND(self, i:int):
-        D:Final[dict] = {"END_AT", i}
+        D:Final[dict] = {"END_AT": i}
+        df:dict
+        with open(self.FL,"r") as buff:
+            df = json.load(buff)
+        dd:list = df["INTP_CALL"]
+        dd.append(D)
+        self.__UPDAT(df)
+
+    def NO_EMBEDS(self):
+        D:Final[dict] = {"NO_EMBED": 1}
+        df:dict
+        with open(self.FL,"r") as buff:
+            df = json.load(buff)
+        dd:list = df["INTP_CALL"]
+        dd.append(D)
+        self.__UPDAT(df)
+
+    def MGS_NUCK(self):
+        D:Final[dict] = {"NUCK": 1}
         df:dict
         with open(self.FL,"r") as buff:
             df = json.load(buff)

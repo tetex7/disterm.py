@@ -57,6 +57,7 @@ async def intrp(tr:str, inn:disnake.ApplicationCommandInteraction) -> int:
     print(sd["DATA"])
     print(sd["INTP_CALL"])
     ie:int = len(sd["DATA"])
+    en:bool = 1
     TTS = False
     ib:int = 0
 
@@ -71,6 +72,12 @@ async def intrp(tr:str, inn:disnake.ApplicationCommandInteraction) -> int:
         except KeyError:
             pass
 
+        try:
+            ie = v["NO_EMBED"]
+            en = False
+        except KeyError:
+            pass
+
     s:list[str] = list()
     e:list[disnake.embeds.Embed] = list()
     evo:bool = False
@@ -81,15 +88,26 @@ async def intrp(tr:str, inn:disnake.ApplicationCommandInteraction) -> int:
             #await inn.response.send_message(i["RAW_TEXT"])
         except KeyError:
             pass
+
+        
         try:
-            t:str = df["EMBED"][0]["TITLE"]
-            tc:str = df["EMBED"][1]["TEXT"]
-            ft:str = df["EMBED"][2]["FOOER"]
-            cL:int = df["EMBED"][3]["CL"]
-            d = disnake.embeds.Embed(title=t, description=tc, color=cL)
-            d.set_footer(text=ft)
+            if (en == 1):
+                t:str = df["EMBED"][0]["TITLE"]
+                tc:str = df["EMBED"][1]["TEXT"]
+                ft:str = df["EMBED"][2]["FOOER"]
+                cL:int = df["EMBED"][3]["CL"]
+                d = disnake.embeds.Embed(title=t, description=tc, color=cL)
+                d.set_footer(text=ft)
             #await inn.response.send_message(embed=d)
-            e.append(d)
+                e.append(d)
+            else:
+                s.append("EMBED BLOCK:\n{{")
+                t:str = df["EMBED"][0]["TITLE"]
+                tc:str = df["EMBED"][1]["TEXT"]
+                ft:str = df["EMBED"][2]["FOOER"]
+                s.append(f"\t**{t}**\n")
+                s.append(f"\t{tc}\n")
+                s.append(f"\n\t{ft}\n}}\n")
         except KeyError:
             pass
         

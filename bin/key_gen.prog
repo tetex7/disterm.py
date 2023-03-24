@@ -1,0 +1,18 @@
+#!/usr/bin/env python3
+from libdiscord.TP import DIS_TP
+from libdiscord.BL84 import enc_keys
+from libdiscord.BL84 import enc_str
+import sys
+import random
+import os
+
+def main(FIT:str):
+    t = DIS_TP(FIT)
+    t.UOM()
+    k = enc_keys.gen()
+    MGS = f"SK1: `{k.SK1}`\nSK2: `{k.SK2}`\nSK3: `{k.SK3}`\nTY: `{k.TY}`\n"
+    t.TEXT(f"KEY IS ARE:\n{MGS}\n")
+    return 
+
+
+main(sys.argv[1])
