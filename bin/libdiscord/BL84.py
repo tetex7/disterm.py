@@ -16,6 +16,7 @@ class enc_keys:
         self.SK2 = k2
         self.SK3 = k3
         self.TY = k
+           
     def gen():
         SK1 = random.randint(41, 999) + datetime.datetime.now().day
         SK2 = random.randint(41, 999) +  (datetime.datetime.now().day + datetime.datetime.now().hour)

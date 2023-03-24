@@ -11,6 +11,10 @@ if (sys.argv[2] == "--help"):
 
 def dmain(FIT:str, ID:int, g:str):
     t = DIS_TP(FIT)
+    if (g == "GODS"):
+        t.TTS()
+        t.UOM()
+        t.TEXT("NO")
     u = user(ID)
     if ((g == "") or (g == None)):
         t.TEXT("NO TEXT ARG")
@@ -22,6 +26,10 @@ def dmain(FIT:str, ID:int, g:str):
 def main(FIT:str, SR:str) -> int:
     
     t = DIS_TP(FIT)
+    if (SR == "GODS"):
+        t.TTS()
+        t.UOM()
+        t.TEXT("NO")
     if ((SR == "") or (SR == None)):
         t.TEXT("NO TEXT ARG")
         return
